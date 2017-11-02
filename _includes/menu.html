@@ -1,0 +1,11 @@
+ {% for p in site.pages %}
+  {% if p.menu == true %}
+  {% if p.url == page.url %}
+   <li class="active" role="presentation">
+  {% else %}
+    <li role="presentation">
+  {% endif %}
+     <a href="{{ p.url }}">{{ p.title }}</a>
+   </li>
+  {% endif %}
+ {% endfor %}
