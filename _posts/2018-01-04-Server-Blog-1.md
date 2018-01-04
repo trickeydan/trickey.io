@@ -1,29 +1,29 @@
 ---
 layout: post
-title:  "Server Blog 1: Setting up ESXI and pfSense"
+title:  "Server Blog 1: Setting up ESXi and pfSense"
 date:   2018-01-04 12:00:00
 categories: blog
 author: "Dan Trickey"
 ---
 This is the first in a series of blogs where I will be detailing instructions for how I setup my servers.
 
-I recently hired a dedicated server from [Oneprovider](https://oneprovider.com/), which is essentially a resold Dedibox from [Online.net](https://www.online.net/en). I have had the opportunity to play around with it a bit and get used to the platform. Now it is time to setup my new computer network using this. I will be talking about this in detail in later posts, but this post is about setting up ESXI and pfSense for routing.
+I recently hired a dedicated server from [Oneprovider](https://oneprovider.com/), which is essentially a resold Dedibox from [Online.net](https://www.online.net/en). I have had the opportunity to play around with it a bit and get used to the platform. Now it is time to setup my new computer network using this. I will be talking about this in detail in later posts, but this post is about setting up ESXi and pfSense for routing.
 
-## Why ESXI?
+## Why ESXi?
 
-I know that many people will criticise me for this choice of hypervisor, as many non-propietary alternatives do exist, such as KVM. However, during my testing, this was the easiest to configure and has a graphical interface which is ideal for a novice.
+I know that many people will criticise me for this choice of hypervisor, as many non-proprietary alternatives do exist, such as KVM. However, during my testing, this was the easiest to configure and has a graphical interface which is ideal for a novice.
 
-## Setting up ESXI
+## Setting up ESXi
 
-I have to admit here that I feel like I cheated, Online.net has a one click install option for ESXI and this is the only way to install operating systems that they support. There are other ways using IPMI, but I nearly bricked my system using this as I didn't know how to use it properly.
+I have to admit here that I feel like I cheated, Online.net has a one click install option for ESXi and this is the only way to install operating systems that they support. There are other ways using IPMI, but I nearly bricked my system using this as I didn't know how to use it properly.
 
-Anyway, ESXI is installed on my server after setup. We need to upload iso files for operating systems to the filestore. In my case, I uploaded pfSense (for routing), Ubuntu Server (for services) and Ubuntu desktop (for debugging the network).
+Anyway, ESXi is installed on my server after setup. We need to upload iso files for operating systems to the filestore. In my case, I uploaded pfSense (for routing), Ubuntu Server (for services) and Ubuntu desktop (for debugging the network).
 
 I started looking into networking and quickly realised that it would be very painful to pass the IP address through to the router. This would also prevent access to the hypervisor's web interface if the router failed. Thus I opted to pay extra for a second IP address to give to my router.
 
 ## Setting up the networking.
 
-Firstly, we need to create a new vSwitch for the LAN side of our router. Next, create a port group for the new vSwitch. I have named both my switch and port group 'Core' as this will be important for later development of the network. We also need to go into the WAN switch (named vSwitch0, not very easy to change this so I just left it), create a WAN Port Group and enable promiscious mode. This will allow our second IP address to be passed through to our router VM.
+Firstly, we need to create a new vSwitch for the LAN side of our router. Next, create a port group for the new vSwitch. I have named both my switch and port group 'Core' as this will be important for later development of the network. We also need to go into the WAN switch (named vSwitch0, not very easy to change this so I just left it), create a WAN Port Group and enable promiscuous mode. This will allow our second IP address to be passed through to our router VM.
 
 ![](https://images2.imgbox.com/34/39/XyCCUOqN_o.png)
 
