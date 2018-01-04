@@ -32,11 +32,11 @@ Firstly, we need to create a new vSwitch for the LAN side of our router. Next, c
 We need to create a virtual machine for the router. I always name my machine after the FQDN of the machine for easy identification later. As pfSense is based on FreeBSD, we need to set the Guest OS to FreeBSD (64-bit).
 I selected the default datastore and the following settings:
 
-- 2 vCPU
-- 2048MB RAM
-- 8GB Disk
-- Two network adapters, one on each vSwitch
-- CDROM Drive with the pfSense ISO loaded
+* 2 vCPU
+* 2048MB RAM
+* 8GB Disk
+* Two network adapters, one on each vSwitch
+* CDROM Drive with the pfSense ISO loaded
 
 ![Router Config](https://images2.imgbox.com/8d/2c/MQbmLl36_o.png)
 
@@ -67,15 +67,15 @@ We can now access the WebConfigurator by loading the router IP in the web browse
 
 Start the wizard, most fields are pretty self-explanatory. I used the Google Public DNS servers 8.8.8.8, 8.8.4.4.
 When you get to the WAN Configuration, enter the following:
-- Selected Type: static
-- MAC Address: The address we get from OneProvider
-- IP Address: Your Failover IP
-- Subnet Mask: 24
-- Default Gateway: If your IP is a.b.c.d, put a.b.c.1
+* Selected Type: static
+* MAC Address: The address we get from OneProvider
+* IP Address: Your Failover IP
+* Subnet Mask: 24
+* Default Gateway: If your IP is a.b.c.d, put a.b.c.1
 
 You can leave the LAN Configuration as it is if you like, but I'm changing mine to:
-- IP Address: 10.1.0.1
-- Subnet Mask: 24
+* IP Address: 10.1.0.1
+* Subnet Mask: 24
 
 You can now finish the wizard and reload the settings. If you change the IP address, you will need to navigate to the new address in your browser. You may also need to turn on and off networking on Ubuntu.
 
@@ -92,4 +92,4 @@ Save and reload. You should be able to access the configurator publically now.
 
 We can now delete the Ubuntu VM, it's no longer needed.
 
-Up next, I will be getting IPv6 connectivity to my v4-only network.
+Up next, I will be getting IPv6 connectivity to my v4*only network.
