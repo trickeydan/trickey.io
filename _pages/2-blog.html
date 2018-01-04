@@ -10,16 +10,13 @@ menu: true
 
   <ul class="post-list">
     {% for post in site.posts %}
-      <li>
         {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
-
-
-        <h2>
-          <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-        </h2>
-        <span class="post-meta">{{ post.date | date: date_format }}</span>
-        <span class="post-meta">{{ post.excerpt }}</span>
-      </li>
+        <a href="{{ post.url | relative_url }}"><h2 class="post-link" >{{ post.title | escape }}</h2></a>
+        <div class="post-meta">{{ post.date | date: date_format }}</div>
+        </br>
+        <div class="post-meta">{{ post.content | truncatewords:350 }}</div>
+        <a href="{{ post.url | relative_url }}" class="btn btn-lg btn-primary">Read More</a>
+        <hr>
     {% endfor %}
   </ul>
 </div>
